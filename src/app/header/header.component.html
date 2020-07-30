@@ -1,3 +1,10 @@
 <header>
-<h1>{{today | date }}</h1> 
+<h1>{{today | date: 'h:mm a' }}</h1> 
+<div id="sunsetIMG"><i class="fas fa-sun" *ngIf="isDay"></i>
+<img src="./../../assets/67561e3e378f8513c81b977aa9d662b6.png" alt="" *ngIf="!isDay"></div>
+<div id="sunsetText">
+    <p>Sunrise: {{sunrise}}</p>
+    <p>Sunset: {{sunset}}</p>
+</div>
+
 </header>

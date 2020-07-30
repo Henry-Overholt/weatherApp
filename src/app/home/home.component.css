@@ -1,5 +1,5 @@
 main {
-    height:100vh;
+    height:500px;
     width:100%;
     background:rgb(9, 34, 56);
     color: rgb(164, 210, 226);
@@ -12,14 +12,17 @@ main {
 }
 h1{
     color: rgb(164, 210, 226);
+    font-size:50px;
 }
 h2 {
     color:rgb(137, 252, 0);
+    font-size:40px;
 }
 h3 {
     /* color:rgb(0, 139, 248); */
     /* color:rgb(255, 74,28); */
     color:rgb(148,72, 188);
+    font-size:30px;
 }
 .circle {
     display:flex;
@@ -45,19 +48,28 @@ h3 {
     rgb(148,72, 188);
     position: absolute;
     top:35%;
-    right:50%;
+    right:250px;
     transform: translateY(-100px);
+    color:rgb(137, 252, 0);
 
+}
+.column {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    height:100%;
 }
 .threeHourForcastContainer {
     width:150px;
     height:150px;
     background:rgb(164, 210, 226);
     position: absolute;
-    right:50%;
+    right:260px;
     top:50%;
 }
-p {
+.temperature {
     font-weight: bolder;
     font-size:120px;
 }
@@ -66,6 +78,19 @@ p {
     width:49%;
     height:500px;
     
+}
+#feelsLike{
+    font-size:20px;
+}
+#windDirectionContainer {
+    color:rgb(9, 34, 56);
+}
+#windDirection {
+    /* transform:rotate(30deg); */
+    font-size: 40px;
+}
+img {
+    width:125px;
 }
 /*  background:rgb(137, 252, 0);
     color:rgb(9, 34, 56); */

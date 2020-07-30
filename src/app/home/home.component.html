@@ -1,15 +1,29 @@
 <app-header></app-header>
 <main>
+    
     <div id="leftContainer">
-    <h1>Color Test</h1>
-    <h2>Color Test #2</h2>
-    <h3>Color Test #3</h3>
-</div>
+    <h1>{{today | date}}</h1>
+    <h2>{{dayOfWeek}}</h2>
+    <h3>High:  / Low:  </h3>
+    </div>
     <div id="rightContainer">
         <div class="circle temperatureContainer">
-        <p>90°</p>
+            <div id="temperature" class="column">
+        <p class="temperature">{{temperature}}°</p>
+        <p id="feelsLike">Feels Like: {{feelsLike}}°</p>
+    </div>
         </div>
-        <div class="circle weatherIconContainer"></div>
-        <div class="circle threeHourForcastContainer"></div>
+        <div class="circle weatherIconContainer">
+            <div id="weatherDescription" class="column">
+                <img src="http://openweathermap.org/img/wn/{{weatherConditionIcon}}@2x.png" alt="{{weatherConditionDescription}}">
+                <!-- <p>{{weatherConditionDescription}}</p> -->
+            </div>
+        </div>
+        <div class="circle threeHourForcastContainer">
+            <div class="column" id="windDirectionContainer">
+                <h4>Wind :</h4>
+                <i id="windDirection" class="fa fa-arrow-up" ></i>
+                <p>{{windSpeed}}mph</p></div>
+        </div>
 </div>
 </main>
