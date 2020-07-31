@@ -23,6 +23,7 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 p {
     padding:20px;
@@ -33,4 +34,5 @@ img {
 i {
     font-size:40px;
     color:yellow;
+    position: absolute;;
 }

@@ -34,7 +34,7 @@ this.weatherConditionIcon = response.weather[0].icon;
 this.windSpeed = response.wind.speed;
 this.windDirection = parseInt(response.wind.deg);
 document.getElementById("windDirection").style.transform=`rotate(${this.windDirection}deg)`;
-this.setSunTime(response.sys.sunrise, response.sys.sunset);
+this.setSunTime(parseInt(response.sys.sunrise), parseInt(response.sys.sunset));
   })
 }
 updateWeather() {
@@ -50,7 +50,6 @@ convertFtoC():void {
 }
 convertCtoF():void {}
 setSunTime(sunrise, sunset) {
-  console.log("sunrise",sunrise);
-  console.log('sunset', sunset);
+ this.openWeatherService.setSunTime(sunrise, sunset);
 }
 }

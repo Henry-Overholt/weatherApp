@@ -24,6 +24,8 @@ dayOfWeek :string[] = [
 apiKey:string = openWeather.openWeather.apiKey;
 numDay:number = this.today.getDay();
 day:string = this.dayOfWeek[this.numDay];
+tomorrow:string=this.dayOfWeek[(this.numDay +1)];
+twoDaysAhead:string=this.dayOfWeek[this.numDay +2];
 sunset:string;
 sunrise:string;
 
