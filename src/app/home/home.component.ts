@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OpenWeatherService} from './../services/open-weather.service';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

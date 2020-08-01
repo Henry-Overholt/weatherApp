@@ -1,10 +1,13 @@
 <header>
 <h1>{{today | date: 'h:mm a' }}</h1> 
-<div id="sunsetIMG"><i id ="sun"class="fas fa-sun" *ngIf="isDay"></i>
-<img src="./../../assets/67561e3e378f8513c81b977aa9d662b6.png" alt="" *ngIf="!isDay"></div>
+<div id="sunsetIMG">
+    <!-- <mat-slider min="0" max="100" step="1" value='1'></mat-slider> -->
+    <i id ="sun"class="fas fa-sun" *ngIf="isDay"></i>
+<img id="moon" src="./../../assets/67561e3e378f8513c81b977aa9d662b6.png" alt="" *ngIf="!isDay"></div>
 <div id="sunsetText">
     <p>Sunrise: {{sunrise}} AM</p>
     <p>Sunset: {{sunset}} PM</p>
 </div>
 
 </header>
+<!--  -->

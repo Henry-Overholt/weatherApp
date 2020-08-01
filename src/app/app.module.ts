@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { ForecastComponent } from './forecast/forecast.component';
+import {MatSliderModule, } from '@angular/material/slider';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { ForecastComponent } from './forecast/forecast.component';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+   MatSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

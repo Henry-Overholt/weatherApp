@@ -1,28 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { OpenWeatherService} from './../services/open-weather.service';
+import { ɵBROWSER_SANITIZATION_PROVIDERS__POST_R3__ } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
+  
 })
 export class HeaderComponent implements OnInit {
 today:any = new Date
-isDay:boolean = false;
+isDay:boolean = true;
 sunrise:string;
 sunset:string;
 totalTime:number;
 sunriseTimeStamp:number;
 sunsetTimeStamp:number;
 hours:any;
+current:any = this.today.getHours();
   constructor(private openWeatherService:OpenWeatherService) { }
 
   ngOnInit(): void {
 // this.openWeatherService.getOneCallWeather('48073').subscribe(response )    
 
     setInterval(() => {
-      this.today = Date()
+      this.today = Date();
+      
+      // this.isItDaytime();
     },1000);
+    setInterval(()=> {
+    this.isItDaytime();
+    },600000)
     setTimeout(()=> {
       this.translateTime([this.openWeatherService.sunrise,this.openWeatherService.sunset]);
       // this.sunrise =this.openWeatherService.sunrise;
@@ -54,23 +63,53 @@ hours:any;
     if (i === 0) {
       this.sunrise = formattedTime;
     } else {this.sunset = formattedTime};
-    console.log(formattedTime);
+    // console.log(formattedTime);
     }  
-    // this.moveSun();
+    this.isItDaytime();
   }
 
-  moveSun() {
-    // if (this.sunsetTimeStamp < this.today.getTime()) {
-    //   this.isDay =true;
-    // } else {
-    //   this.isDay = false;
+  isItDaytime() {
+    let zero = new Date(this.sunriseTimeStamp * 1000).getHours();
+    let hundred = new Date(this.sunsetTimeStamp  * 1000).getHours();
+    this.totalTime = hundred-zero;
+    this.current = new Date().getHours();
+    // console.log("Zero", zero)
+    // console.log( "hundred", hundred)
+    // console.log( 'this.Current', this.current);
+    if (this.current >= zero && this.current <= hundred) {
+      this.isDay = true;
+      this.moveSun(zero);
+      console.log(this.isDay)
+    } else {
+      this.isDay = false;
+      this.moveMoon(zero, hundred);
+      console.log(this.isDay)
     }
+    
+    }
+    moveSun(sunriseHour) {
 
-// console.log("Current Time", this.today.getTime(), );
-// // let timePassed = this.sunsetTimeStamp -this.today.getTime();
-// // console.log(timePassed);
-//     document.querySelector("i").style.left ="50%";
-//   }
-
+     
+    let timePassed = this.current - sunriseHour ;
+    let percentage = Math.floor((timePassed/this.totalTime)*100);
+   
+    document.getElementById("sun").style.left=`${percentage}%`;
+    document.getElementById("sun").style.transitionDuration = '2s';
+ console.log(percentage)
+    }
+    moveMoon(zero, hundred) {
+let timeTillSunrise = (24 - hundred) + zero;
+this.current = new Date().getHours();
+let timePassed;
+if (this.current > hundred) {
+  timePassed = this.current - hundred;
+} else {
+  timePassed = (24 - hundred)+this.current;
+}
+let percentage = Math.floor((timePassed/timeTillSunrise)*100);
+document.getElementById("moon").style.right=`${percentage}%`;
+    document.getElementById("moon").style.transitionDuration = '2s';
+// console.log(timeTillSunrise);
+    }
 }
 
