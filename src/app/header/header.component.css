@@ -66,12 +66,17 @@ p {
     width:45px;
     position: absolute;
     right:0;
+    visibility: hidden;
     transform:translateX(-22.5px);
+    transition-duration: right 2s, visibility 2s;
+
 }
 #sun {
     font-size:40px;
     transform:translateX(-20px);
     color:yellow;
+    left:0;
     position: absolute;
- 
+    transition: left 2s;
+    visibility: visible;
 }
