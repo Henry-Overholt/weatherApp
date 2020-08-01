@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { OpenWeatherService} from './../services/open-weather.service';
-import { ɵBROWSER_SANITIZATION_PROVIDERS__POST_R3__ } from '@angular/platform-browser';
 
 
 @Component({
@@ -11,12 +10,14 @@ import { ɵBROWSER_SANITIZATION_PROVIDERS__POST_R3__ } from '@angular/platform-b
 })
 export class HeaderComponent implements OnInit {
 today:any = new Date
-isDay:boolean = true;
+isDay:boolean;
 sunrise:string;
 sunset:string;
 totalTime:number;
 sunriseTimeStamp:number;
 sunsetTimeStamp:number;
+sunriseValue:number;
+sunsetValue:number;
 hours:any;
 current:any = this.today.getHours();
   constructor(private openWeatherService:OpenWeatherService) { }
@@ -27,11 +28,10 @@ current:any = this.today.getHours();
     setInterval(() => {
       this.today = Date();
       
-      // this.isItDaytime();
-    },1000);
+    },2000);
     setInterval(()=> {
     this.isItDaytime();
-    },600000)
+    },60000)
     setTimeout(()=> {
       this.translateTime([this.openWeatherService.sunrise,this.openWeatherService.sunset]);
       // this.sunrise =this.openWeatherService.sunrise;
@@ -40,10 +40,17 @@ current:any = this.today.getHours();
   }
 
   translateTime(array) {
-    this.sunriseTimeStamp = array[0];
-    this.sunsetTimeStamp = array[1];
-    this.totalTime = this.sunsetTimeStamp-this.sunriseTimeStamp;
-    // console.log(totalTime);
+    // this.sunriseTimeStamp = array[0];
+    // this.sunsetTimeStamp = array[1];
+    //
+    let zeroHour = new Date(array[0]* 1000).getHours();
+    let zeroMin = new Date(array[0]* 1000).getMinutes();
+    let hundredHour = new Date(array[1]  * 1000).getHours();
+    let hundredMin = new Date(array[1]  * 1000).getMinutes();
+    this.sunriseValue = zeroHour + (zeroMin/60);
+    this.sunsetValue= hundredHour + (hundredMin/60);
+    this.totalTime = this.sunsetValue-this.sunriseValue;
+    // console.log(this.totalTime);
     for (let i = 0; i< array.length; i++) {
     let unix_timestamp = array[i];
     // Create a new JavaScript Date object based on the timestamp
@@ -53,8 +60,6 @@ current:any = this.today.getHours();
     if (i === 0) {
       this.hours = date.getHours();
     } else {this.hours = date.getHours()-12;};
-    
-      
     // let hours = date.getHours();
     // Minutes part from the timestamp
     let minutes = "0" + date.getMinutes();
@@ -64,52 +69,43 @@ current:any = this.today.getHours();
       this.sunrise = formattedTime;
     } else {this.sunset = formattedTime};
     // console.log(formattedTime);
-    }  
-    this.isItDaytime();
+    } 
+    this.isItDaytime(); 
   }
 
   isItDaytime() {
-    let zero = new Date(this.sunriseTimeStamp * 1000).getHours();
-    let hundred = new Date(this.sunsetTimeStamp  * 1000).getHours();
-    this.totalTime = hundred-zero;
-    this.current = new Date().getHours();
-    // console.log("Zero", zero)
-    // console.log( "hundred", hundred)
-    // console.log( 'this.Current', this.current);
-    if (this.current >= zero && this.current <= hundred) {
+    let currentHour = new Date().getHours();
+    let currentMin = new Date().getMinutes();
+    this.current = currentHour + (currentMin/60);
+    if (this.current >= this.sunriseValue && this.current <=this.sunsetValue) {
       this.isDay = true;
-      this.moveSun(zero);
-      console.log(this.isDay)
+      this.moveSun();
     } else {
       this.isDay = false;
-      this.moveMoon(zero, hundred);
-      console.log(this.isDay)
+      this.moveMoon();
     }
     
     }
-    moveSun(sunriseHour) {
-
-     
-    let timePassed = this.current - sunriseHour ;
+    moveSun() {
+    let timePassed = this.current - this.sunriseValue ;
     let percentage = Math.floor((timePassed/this.totalTime)*100);
-   
     document.getElementById("sun").style.left=`${percentage}%`;
     document.getElementById("sun").style.transitionDuration = '2s';
- console.log(percentage)
+    console.log(percentage);
     }
-    moveMoon(zero, hundred) {
-let timeTillSunrise = (24 - hundred) + zero;
-this.current = new Date().getHours();
-let timePassed;
-if (this.current > hundred) {
-  timePassed = this.current - hundred;
-} else {
-  timePassed = (24 - hundred)+this.current;
-}
-let percentage = Math.floor((timePassed/timeTillSunrise)*100);
-document.getElementById("moon").style.right=`${percentage}%`;
-    document.getElementById("moon").style.transitionDuration = '2s';
-// console.log(timeTillSunrise);
+    moveMoon() {
+      let timeTillSunrise = (24 - this.sunsetValue) + this.sunriseValue;
+      this.current = new Date().getHours();
+      let timePassed;
+      if (this.current > this.sunsetValue) {
+          timePassed = this.current - this.sunsetValue;
+        } else {
+          timePassed = (24 - this.sunsetValue)+this.current;
+        }
+      let percentage = Math.floor((timePassed/timeTillSunrise)*100);
+      document.getElementById("moon").style.right=`${percentage}%`;
+      document.getElementById("moon").style.transitionDuration = '2s';
+      console.log(percentage)
     }
 }
 

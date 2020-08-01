@@ -1,5 +1,14 @@
 <header>
-<h1>{{today | date: 'h:mm a' }}</h1> 
+    <div id="headerTitle">
+        <img id="logo" src="./../../assets/cloudSunny.jpeg" alt="">
+        <h1>{{today | date: 'h:mm a' }}</h1>
+        <form >
+            <label for="zipCode">
+                <input type="number" name="zipCode" placeholder="Enter ZipCode">
+            </label>
+        </form>
+    </div>
+ 
 <div id="sunsetIMG">
     <!-- <mat-slider min="0" max="100" step="1" value='1'></mat-slider> -->
     <i id ="sun"class="fas fa-sun" *ngIf="isDay"></i>
