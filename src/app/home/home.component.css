@@ -1,11 +1,12 @@
 main {
-    height:500px;
+    height:400px;
     width:100%;
     background:rgb(9, 34, 56);
     color: rgb(164, 210, 226);
     display:flex;
     justify-content: center;
     align-items: center;
+    border:1px solid green;
 }
 #leftContainer {
     width:49%;

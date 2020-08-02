@@ -10,11 +10,9 @@ header {
    flex-direction:column;
    align-items: center;
    justify-content: center;
+   border:1px solid white;
 }
-/* mat-slider {
-    width:100%;
-    color:white;
-} */
+
 h1 {
     text-align: center;
     font-size:40px;
@@ -68,7 +66,7 @@ p {
     right:0;
     visibility: hidden;
     transform:translateX(-22.5px);
-    transition-duration: right 2s, visibility 2s;
+    transition: right 2s;
 
 }
 #sun {
@@ -78,5 +76,5 @@ p {
     left:0;
     position: absolute;
     transition: left 2s;
-    visibility: visible;
+    visibility: hidden;
 }
