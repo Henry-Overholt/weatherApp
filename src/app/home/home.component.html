@@ -1,30 +1,35 @@
 <app-header></app-header>
 <main>
-    
-    <div id="leftContainer">
-    <h1>{{today | date}}</h1>
-    <h2>{{dayOfWeek}}</h2>
-    <h3>High:  / Low:  </h3>
+  <div id="leftContainer">
+    <h1>Royal Oak, MI</h1>
+    <h2>{{ today | date }}</h2>
+    <h3>{{ dayOfWeek }}</h3>
+  </div>
+  <div id="rightContainer">
+    <div class="circle temperatureContainer">
+      <div id="temperature" class="column">
+        <p class="temperature">{{ temperature }}°</p>
+        <p id="feelsLike">Feels Like: {{ feelsLike }}°</p>
+      </div>
     </div>
-    <div id="rightContainer">
-        <div class="circle temperatureContainer">
-            <div id="temperature" class="column">
-        <p class="temperature">{{temperature}}°</p>
-        <p id="feelsLike">Feels Like: {{feelsLike}}°</p>
+    <div class="circle weatherIconContainer">
+      <div id="weatherDescription" class="column">
+        <img
+          src="http://openweathermap.org/img/wn/{{
+            weatherConditionIcon
+          }}@2x.png"
+          alt="{{ weatherConditionDescription }}"
+        />
+        <!-- <p>{{weatherConditionDescription}}</p> -->
+      </div>
     </div>
-        </div>
-        <div class="circle weatherIconContainer">
-            <div id="weatherDescription" class="column">
-                <img src="http://openweathermap.org/img/wn/{{weatherConditionIcon}}@2x.png" alt="{{weatherConditionDescription}}">
-                <!-- <p>{{weatherConditionDescription}}</p> -->
-            </div>
-        </div>
-        <div class="circle threeHourForcastContainer">
-            <div class="column" id="windDirectionContainer">
-                <h4>Wind :</h4>
-                <i id="windDirection" class="fa fa-arrow-up" ></i>
-                <p>{{windSpeed}}mph</p></div>
-        </div>
-</div>
+    <div class="circle threeHourForcastContainer">
+      <div class="column" id="windDirectionContainer">
+        <h4>Wind :</h4>
+        <i id="windDirection" class="fa fa-arrow-up"></i>
+        <p>{{ windSpeed }}mph</p>
+      </div>
+    </div>
+  </div>
 </main>
 <app-forecast></app-forecast>

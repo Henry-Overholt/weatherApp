@@ -37,7 +37,7 @@ export class OpenWeatherService {
   }
   getOneCallWeather(): Observable<any> {
     return this.http.get(
-      `http://api.openweathermap.org/data/2.5/onecall?lat=${this.latitude}&lon=${this.longitude}&exclude=hourly&appid=${this.apiKey}`
+      `http://api.openweathermap.org/data/2.5/onecall?lat=${this.latitude}&lon=${this.longitude}&units=imperial&exclude=hourly&appid=${this.apiKey}`
     );
     // console.log(this.longitude, this.latitude);
   }

@@ -20,27 +20,33 @@ export class HomeComponent implements OnInit {
   constructor(private openWeatherService: OpenWeatherService) {}
 
   ngOnInit(): void {
-    this.updateWeather();
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
         this.openWeatherService.setLocation(
           pos.coords.latitude,
           pos.coords.longitude
         );
-        this.getOneCallWeather();
+
         // console.log(pos.coords.latitude, pos.coords.longitude);
-        // console.log('here');
+        console.log('here');
       });
     } else {
       this.openWeatherService.setLocation(43.331429, -83.045753);
+
+      console.log('not here');
     }
+    setTimeout(() => {
+      this.getOneCallWeather();
+      this.updateWeather();
+    }, 500);
+
     // this.getWeather(this.zipcode);
   }
 
   getWeather(zip: string): void {
     this.openWeatherService.getWeather(zip).subscribe((response) => {
-      this.temperature = this.convertKtoF(response.main.temp);
-      this.feelsLike = this.convertKtoF(response.main.feels_like);
+      this.temperature = Math.floor(response.main.temp);
+      this.feelsLike = Math.floor(response.main.feels_like);
       this.weatherConditionDescription = response.weather[0].description;
       this.weatherConditionIcon = response.weather[0].icon;
       this.windSpeed = response.wind.speed;
@@ -56,8 +62,8 @@ export class HomeComponent implements OnInit {
   }
   getOneCallWeather() {
     this.openWeatherService.getOneCallWeather().subscribe((response) => {
-      this.temperature = this.convertKtoF(response.current.temp);
-      this.feelsLike = this.convertKtoF(response.current.feels_like);
+      this.temperature = Math.floor(response.current.temp);
+      this.feelsLike = Math.floor(response.current.feels_like);
       this.weatherConditionDescription =
         response.current.weather[0].description;
       this.weatherConditionIcon = response.current.weather[0].icon;

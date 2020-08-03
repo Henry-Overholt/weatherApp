@@ -20,18 +20,19 @@ export class HeaderComponent implements OnInit {
   constructor(private openWeatherService: OpenWeatherService) {}
 
   ngOnInit(): void {
-    // this.openWeatherService.getOneCallWeather('48073').subscribe(response )
-    setInterval(() => {
-      //every 2 seconds update the time in the component
-      this.today = Date();
-    }, 2000);
     setTimeout(() => {
       //delay converting the time to so that functions don't run until we get the time. limits bugs
       this.translateTime([
         this.openWeatherService.sunrise,
         this.openWeatherService.sunset,
       ]);
-    }, 200);
+    }, 600);
+    // this.openWeatherService.getOneCallWeather('48073').subscribe(response )
+    setInterval(() => {
+      //every 2 seconds update the time in the component
+      this.today = Date();
+    }, 2000);
+
     setInterval(() => {
       //every 5 minutes recalculate sun or moon location based on time.
       this.isItDaytime();

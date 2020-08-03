@@ -1,11 +1,65 @@
 <main>
-    <div id="today" class="day">
-        <h1>Today</h1>
+  <div id="today" class="day">
+    <h1>Today</h1>
+    <img
+      src="http://openweathermap.org/img/wn/{{
+        todayWeather.weather[0].icon
+      }}@2x.png"
+      alt="{{ todayWeather.weather[0].main }}"
+    />
+    <h4>{{ todayWeather.weather[0].description }}</h4>
+    <div class="temperatures">
+      <p>
+        Morning: <span>{{ todayTemps[0] }}°</span>
+      </p>
+      <p>
+        Day: <span>{{ todayTemps[1] }}°</span>
+      </p>
+      <p>
+        Evening: <span>{{ todayTemps[2] }}°</span>
+      </p>
     </div>
-    <div id="tomorrow" class="day">
-        <h1>{{tomorrow}}</h1>
+  </div>
+  <div id="tomorrow" class="day">
+    <h1>{{ tomorrow }}</h1>
+    <img
+      src="http://openweathermap.org/img/wn/{{
+        tomorrowWeather.weather[0].icon
+      }}@2x.png"
+      alt="{{ tomorrowWeather.weather[0].main }}"
+    />
+    <h4>{{ tomorrowWeather.weather[0].description }}</h4>
+    <div class="temperatures">
+      <p>
+        Morning: <span>{{ tomorrowTemps[0] }}°</span>
+      </p>
+      <p>
+        Day: <span>{{ tomorrowTemps[1] }}°</span>
+      </p>
+      <p>
+        Evening: <span>{{ tomorrowTemps[2] }}°</span>
+      </p>
     </div>
-    <div id="twoDaysForward" class="day">
-        <h1> {{twoDaysAhead}}</h1>
+  </div>
+  <div id="twoDaysForward" class="day">
+    <h1>{{ twoDaysAhead }}</h1>
+    <img
+      src="http://openweathermap.org/img/wn/{{
+        twoDaysAheadWeather.weather[0].icon
+      }}@2x.png"
+      alt="{{ twoDaysAheadWeather.weather[0].main }}"
+    />
+    <h4>{{ twoDaysAheadWeather.weather[0].description }}</h4>
+    <div class="temperatures">
+      <p>
+        Morning: <span>{{ twoDaysAheadTemps[0] }}°</span>
+      </p>
+      <p>
+        Day: <span>{{ twoDaysAheadTemps[1] }}°</span>
+      </p>
+      <p>
+        Evening: <span>{{ twoDaysAheadTemps[2] }}°</span>
+      </p>
     </div>
+  </div>
 </main>
