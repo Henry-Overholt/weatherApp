@@ -17,29 +17,46 @@ export class HeaderComponent implements OnInit {
   hours: any;
   current: any = this.today.getHours();
   zip: string = '48073';
+  longitude: number;
+  latitude: number;
   constructor(private openWeatherService: OpenWeatherService) {}
 
   ngOnInit(): void {
-    setTimeout(() => {
-      //delay converting the time to so that functions don't run until we get the time. limits bugs
-      this.translateTime([
-        this.openWeatherService.sunrise,
-        this.openWeatherService.sunset,
-      ]);
-    }, 1000);
-    // this.openWeatherService.getOneCallWeather('48073').subscribe(response )
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((pos) => {
+        this.getOneCallWeather(pos.coords.latitude, pos.coords.longitude);
+        this.latitude = pos.coords.latitude;
+        this.longitude = pos.coords.longitude;
+        console.log('Header COMPONENT ~ here');
+      });
+    } else {
+      this.getOneCallWeather(43.331429, -83.045753);
+      this.latitude = 43.331429;
+      this.longitude = -83.045753;
+      console.log('header COMPONENT not here');
+    }
     setInterval(() => {
-      //every 2 seconds update the time in the component
+      //refreshes new time every 2 seconds for the clock in header
       this.today = Date();
     }, 2000);
-
     setInterval(() => {
-      //every 5 minutes recalculate sun or moon location based on time.
+      //runs the day time logic and moves sun every 5 minutes;
       this.isItDaytime();
     }, 60000);
   }
+  getOneCallWeather(latitude: number, longitude) {
+    this.openWeatherService
+      .getOneCallWeather(latitude, longitude)
+      .subscribe((response) => {
+        this.translateTime([
+          parseInt(response.current.sunrise),
+          parseInt(response.current.sunset),
+        ]);
+      });
+  }
 
   translateTime(array) {
+    // Will display time in 10:30:23 format
     //takes an array of two values, the first being the sunrise timestamp, second being sunset timestamp. Then converts them to normal time syntax.
     let zeroHour = new Date(array[0] * 1000).getHours(); //returns the hour of the sunrise
     let zeroMin = new Date(array[0] * 1000).getMinutes(); //returns the min of the sunsrise

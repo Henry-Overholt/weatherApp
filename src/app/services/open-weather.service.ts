@@ -35,9 +35,11 @@ export class OpenWeatherService {
       `http://api.openweathermap.org/data/2.5/weather?zip=${event_zip}&appid=${this.apiKey}`
     );
   }
-  getOneCallWeather(): Observable<any> {
+  getOneCallWeather(latitude: number, longitude: number): Observable<any> {
+    this.longitude = longitude;
+    this.latitude = latitude;
     return this.http.get(
-      `http://api.openweathermap.org/data/2.5/onecall?lat=${this.latitude}&lon=${this.longitude}&units=imperial&exclude=hourly&appid=${this.apiKey}`
+      `http://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=imperial&exclude=hourly&appid=${this.apiKey}`
     );
     // console.log(this.longitude, this.latitude);
   }
