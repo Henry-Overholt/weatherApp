@@ -41,7 +41,7 @@ yarn-error.log
 testem.log
 /typings
 src/environments/openWeather.environment.ts
-src/environments/environment.prod.ts
+src/environments
 
 # System Files
 .DS_Store
