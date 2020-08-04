@@ -82,6 +82,10 @@ h3 {
 #windDirectionContainer {
   color: rgb(9, 34, 56);
 }
+#windDirectionContainer h4 {
+  text-align: center;
+  color: rgb(9, 34, 56);
+}
 #windDirection {
   /* transform:rotate(30deg); */
   font-size: 40px;
@@ -92,11 +96,14 @@ img {
 section {
   background: rgb(9, 34, 56);
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 #minutesContainer {
-  width: 100%;
+  width: 90%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 .minute {
   border: 1px solid rgb(164, 210, 226);
@@ -113,15 +120,23 @@ section {
 }
 h4 {
   color: rgb(137, 252, 0);
-  margin: 0px 0px 5px 5px;
+  margin-bottom: 5px;
+  width: 90%;
+  font-size: 21px;
 }
 #clock {
   display: flex;
+  width: 90%;
   justify-content: space-between;
   color: rgb(137, 252, 0);
 }
 #clock p {
   margin-top: 5px;
+  font-size: 18px;
 }
 /*  background:rgb(137, 252, 0);
     color:rgb(9, 34, 56); */
+span {
+  color: rgb(148, 72, 188);
+  font-size: 30px;
+}

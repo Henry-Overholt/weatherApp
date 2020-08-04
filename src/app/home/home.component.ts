@@ -14,6 +14,8 @@ export class HomeComponent implements OnInit {
   feelsLike: number;
   weatherConditionIcon: string;
   weatherConditionDescription: string;
+  cityName: string;
+  stateName: string;
   zipcode: string = '48073';
   windSpeed: any;
   windDirection: number;
@@ -31,12 +33,14 @@ export class HomeComponent implements OnInit {
         //   pos.coords.longitude
         // );
         this.getOneCallWeather(pos.coords.latitude, pos.coords.longitude);
+        this.getWeatherCityName(pos.coords.latitude, pos.coords.longitude);
         this.latitude = pos.coords.latitude;
         this.longitude = pos.coords.longitude;
         console.log('HOME COMPONENT ~ here');
       });
     } else {
       this.getOneCallWeather(43.331429, -83.045753);
+      this.getWeatherCityName(43.331429, -83.045753);
       this.latitude = 43.331429;
       this.longitude = -83.045753;
       console.log('HOME COMPONENT not here');
@@ -64,10 +68,22 @@ export class HomeComponent implements OnInit {
       // );
     });
   }
+  getWeatherCityName(latitude: number, longitude: number) {
+    this.openWeatherService
+      .getWeatherCity(latitude, longitude)
+      .subscribe((response) => {
+        this.cityName = response.localityInfo.administrative[3].name;
+        this.stateName = response.localityInfo.administrative[1].name;
+        // console.log(response);
+      });
+    console.log(this.cityName);
+  }
   getOneCallWeather(latitude: number, longitude: number) {
     this.openWeatherService
       .getOneCallWeather(latitude, longitude)
       .subscribe((response) => {
+        // this.cityName = response.timezone;
+        // console.log(response);
         this.temperature = Math.floor(response.current.temp);
         this.feelsLike = Math.floor(response.current.feels_like);
         this.weatherConditionDescription =

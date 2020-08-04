@@ -1,7 +1,9 @@
 <app-header></app-header>
 <main>
   <div id="leftContainer">
-    <h1>Royal Oak, MI</h1>
+    <h1>
+      {{ cityName }}, <span>{{ stateName }}</span>
+    </h1>
     <h2>{{ today | date }}</h2>
     <h3>{{ dayOfWeek }}</h3>
   </div>

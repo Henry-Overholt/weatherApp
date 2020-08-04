@@ -37,6 +37,12 @@ export class OpenWeatherService {
       `http://api.openweathermap.org/data/2.5/weather?zip=${event_zip}&appid=${this.apiKey}`
     );
   }
+  getWeatherCity(latitude: number, longitude: number): Observable<any> {
+    return this.http.get(
+      `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
+      // `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${this.apiKey}`
+    );
+  }
   getOneCallWeather(latitude: number, longitude: number): Observable<any> {
     this.longitude = longitude;
     this.latitude = latitude;

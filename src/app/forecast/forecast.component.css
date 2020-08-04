@@ -27,6 +27,7 @@ h4 {
 }
 .temperatures {
   background: rgba(22, 15, 15, 0.199);
+  width: 60%;
   margin: 5px;
   padding: 10px;
   border-radius: 10px;
