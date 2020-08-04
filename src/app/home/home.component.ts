@@ -17,6 +17,8 @@ export class HomeComponent implements OnInit {
   zipcode: string = '48073';
   windSpeed: any;
   windDirection: number;
+  minutes: object[];
+  rainingInfo: string;
   constructor(private openWeatherService: OpenWeatherService) {}
 
   ngOnInit(): void {
@@ -38,7 +40,7 @@ export class HomeComponent implements OnInit {
     setTimeout(() => {
       this.getOneCallWeather();
       this.updateWeather();
-    }, 500);
+    }, 800);
 
     // this.getWeather(this.zipcode);
   }
@@ -76,6 +78,9 @@ export class HomeComponent implements OnInit {
         parseInt(response.current.sunrise),
         parseInt(response.current.sunset)
       );
+      this.minutes = response.minutely;
+      this.whenWillItRain(this.minutes);
+      // console.log(this.minutes);
     });
   }
   updateWeather() {
@@ -84,12 +89,31 @@ export class HomeComponent implements OnInit {
       this.getOneCallWeather();
     }, 600000);
   }
-  convertKtoF(number: number): number {
-    return Math.floor((number - 273.15) * (9 / 5) + 32);
+  whenWillItRain(array: any[]): void {
+    let rainIn = array.indexOf((obj) => obj.precipitation > 0);
+    let rainTill = array.indexOf((obj) => {
+      obj.precipitation === 0;
+    });
+    console.log('rainIn', rainIn, 'rainTill', rainTill);
+    if (rainIn >= 0) {
+      if (rainIn <= 1) {
+        this.rainingInfo = `Rain in ${rainIn} minute.`;
+      } else {
+        this.rainingInfo = `Rain in ${rainIn} minutes.`;
+      }
+    } else if (rainTill >= 0) {
+      if (rainTill <= 1) {
+        this.rainingInfo = `Rain till ${rainTill} minute.`;
+      } else {
+        this.rainingInfo = `Rain till ${rainTill} minutes.`;
+      }
+    } else {
+      this.rainingInfo = 'No rain for the next 60 minutes';
+    }
+
+    // console.log(this.rainingInfo);
   }
 
-  convertFtoC(): void {}
-  convertCtoF(): void {}
   setSunTime(sunrise, sunset) {
     this.openWeatherService.setSunTime(sunrise, sunset);
   }

@@ -32,4 +32,21 @@
     </div>
   </div>
 </main>
+<section>
+  <h4>{{ rainingInfo }}</h4>
+  <div id="minutesContainer">
+    <div
+      class="minute"
+      *ngFor="let minute of minutes; index as i"
+      [ngClass]="minute.precipitation > 0 ? 'rain' : 'dry'"
+    ></div>
+  </div>
+  <div id="clock">
+    <p>0</p>
+    <p>15</p>
+    <p>30</p>
+    <p>45</p>
+    <p>60</p>
+  </div>
+</section>
 <app-forecast></app-forecast>

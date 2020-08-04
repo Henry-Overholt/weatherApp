@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
         this.openWeatherService.sunrise,
         this.openWeatherService.sunset,
       ]);
-    }, 600);
+    }, 1000);
     // this.openWeatherService.getOneCallWeather('48073').subscribe(response )
     setInterval(() => {
       //every 2 seconds update the time in the component

@@ -89,5 +89,39 @@ h3 {
 img {
   width: 125px;
 }
+section {
+  background: rgb(9, 34, 56);
+  width: 100%;
+}
+#minutesContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.minute {
+  border: 1px solid rgb(164, 210, 226);
+  width: 3px;
+  height: 10px;
+  border-radius: 30%;
+}
+.dry {
+  background: rgb(164, 210, 226);
+}
+.rain {
+  background: rgb(148, 72, 188);
+  border-color: rgb(148, 72, 188);
+}
+h4 {
+  color: rgb(137, 252, 0);
+  margin: 0px 0px 5px 5px;
+}
+#clock {
+  display: flex;
+  justify-content: space-between;
+  color: rgb(137, 252, 0);
+}
+#clock p {
+  margin-top: 5px;
+}
 /*  background:rgb(137, 252, 0);
     color:rgb(9, 34, 56); */

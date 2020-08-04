@@ -63,7 +63,7 @@ p {
   right: 0;
   visibility: hidden;
   transform: translateX(-22.5px);
-  transition: right 2s;
+  transition: all 2s ease-in-out;
 }
 #sun {
   font-size: 40px;
@@ -71,6 +71,6 @@ p {
   color: yellow;
   left: 0;
   position: absolute;
-  transition: left 2s;
+  transition: all 2s ease-in-out;
   visibility: hidden;
 }
