@@ -40,7 +40,6 @@ export class OpenWeatherService {
   getWeatherCity(latitude: number, longitude: number): Observable<any> {
     return this.http.get(
       `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
-      // `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${this.apiKey}`
     );
   }
   getOneCallWeather(latitude: number, longitude: number): Observable<any> {
@@ -49,29 +48,5 @@ export class OpenWeatherService {
     return this.http.get(
       `http://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=imperial&exclude=hourly&appid=${this.apiKey}`
     );
-    // console.log(this.longitude, this.latitude);
-  }
-
-  //   getLocation() {
-  // if (navigator.geolocation){
-  //   navigator.geolocation.getCurrentPosition(pos => {
-  //     this.longitude = pos.coords.longitude;
-  //     this.latitude = pos.coords.latitude;
-  //     return this.latitude, this.longitude;
-  //     // console.log(this.longitude, this.latitude);
-  //   })
-  // }
-  // }
-
-  testService(): void {
-    console.log('service works');
-  }
-  setSunTime(sunrise: string, sunset: string): void {
-    this.sunset = sunset;
-    this.sunrise = sunrise;
-  }
-  setLocation(latitude: number, longitude: number) {
-    this.longitude = longitude;
-    this.latitude = latitude;
   }
 }

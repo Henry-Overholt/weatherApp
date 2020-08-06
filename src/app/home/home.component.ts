@@ -28,10 +28,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
-        // this.openWeatherService.setLocation(
-        //   pos.coords.latitude,
-        //   pos.coords.longitude
-        // );
         this.getOneCallWeather(pos.coords.latitude, pos.coords.longitude);
         this.getWeatherCityName(pos.coords.latitude, pos.coords.longitude);
         this.latitude = pos.coords.latitude;
@@ -45,10 +41,7 @@ export class HomeComponent implements OnInit {
       this.longitude = -83.045753;
       console.log('HOME COMPONENT not here');
     }
-
     this.updateWeather();
-
-    // this.getWeather(this.zipcode);
   }
 
   getWeather(zip: string): void {
@@ -62,10 +55,6 @@ export class HomeComponent implements OnInit {
       document.getElementById(
         'windDirection'
       ).style.transform = `rotate(${this.windDirection}deg)`;
-      // this.setSunTime(
-      //   parseInt(response.sys.sunrise),
-      //   parseInt(response.sys.sunset)
-      // );
     });
   }
   getWeatherCityName(latitude: number, longitude: number) {
@@ -82,8 +71,6 @@ export class HomeComponent implements OnInit {
     this.openWeatherService
       .getOneCallWeather(latitude, longitude)
       .subscribe((response) => {
-        // this.cityName = response.timezone;
-        // console.log(response);
         this.temperature = Math.floor(response.current.temp);
         this.feelsLike = Math.floor(response.current.feels_like);
         this.weatherConditionDescription =
@@ -125,7 +112,5 @@ export class HomeComponent implements OnInit {
     } else {
       this.rainingInfo = 'No rain for the next 60 minutes';
     }
-
-    // console.log(this.rainingInfo);
   }
 }

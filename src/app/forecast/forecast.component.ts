@@ -26,11 +26,13 @@ export class ForecastComponent implements OnInit {
       navigator.geolocation.getCurrentPosition((pos) => {
         this.getWeatherDate(pos.coords.latitude, pos.coords.longitude);
         this.latitude = pos.coords.latitude;
+        this.longitude = pos.coords.longitude;
         console.log('here');
       });
     } else {
-      this.openWeatherService.setLocation(43.331429, -83.045753);
-
+      this.getWeatherDate(43.331429, -83.045753);
+      this.latitude = 43.331429;
+      this.longitude = -83.045753;
       console.log('not here');
     }
     this.tomorrow = this.openWeatherService.tomorrow;

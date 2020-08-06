@@ -97,7 +97,7 @@ export class HeaderComponent implements OnInit {
     let currentHour = new Date().getHours();
     if (currentHour === 0) {
       //conditional statement used if left running it grabs the next days sunrise and sunset
-      this.updateSunrise(this.zip);
+      this.updateSunrise();
     }
     let currentMin = new Date().getMinutes();
     this.current = (currentHour + currentMin / 60) * 10;
@@ -133,9 +133,7 @@ export class HeaderComponent implements OnInit {
     document.getElementById('moon').style.right = `${percentage}%`;
     // console.log(percentage)
   }
-  updateSunrise(zip: string): void {
-    this.openWeatherService.getWeather(zip).subscribe((response) => {
-      this.translateTime([response.sys.sunrise, response.sys.sunset]);
-    });
+  updateSunrise(): void {
+    this.getOneCallWeather(this.latitude, this.longitude);
   }
 }
